@@ -1,81 +1,177 @@
-import React from 'react'
-import { useForm } from "react-hook-form"
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { TextField, Grid, Button, Typography, Box } from '@mui/material';
 
-const App = () => {
+function App() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-   <>
-   <nav style={{backgroundColor:"blue" , background:"cover",padding:"2px" }}>
-    <h1 style={{padding:"3px", marginLeft:"10px" }}>ZeeSoft Academy</h1>
-   </nav>
-     <h1 style={{justifyContent:"center" , textAlign:"center"}}>Admission Form</h1>
-    <div style={{alignContent:"center", alignItems:"center", marginTop:"20px",padding:"30px"}}>
-    <form onSubmit={handleSubmit(onSubmit)}>
+  <>
+  <nav style={{backgroundColor:"blue",color:"white", height:"80px",alignContent:"center",padding:"5px" }}>
+      <h1 >Zeesoft Academy</h1>
+     </nav>
+     <h1 style={{textAlign:"center"}}>Admission Form</h1>
+    <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '20px' }}>
+      <Grid container spacing={3} justifyContent="center">
+        {/* First Column */}
+        <Grid item xs={12} sm={6}>
+          <TextField
+            type="text"
+            label="Full Name"
+            variant="outlined"
+            fullWidth
+            {...register("fullName", { required: true })}
+          />
+          {errors.fullName && <span style={{color:"red"}}>Full Name is required</span>}
+          <br /><br />
 
-     <div style={{display:"flex" ,justifyContent:"center", gap:"30%", justifyItems:"center"}}>
-      
-     <div> <label>First Name</label><br />
-      <input style={{width: "200%",height:" 3rem",borderRadius:"30px"}} type='text' {...register("firstName", { required: true, maxLength: 20 })} /> <br /></div>
-         
-         
-      <div><label>Father Name</label><br />
-      <input type='text'  style={{width: "200%",height:" 3rem",borderRadius:"30px"}}{...register("firstName", { required: true, maxLength: 20 })} /> <br /> </div>
-       
-        </div>
+          <TextField
+            type="email"
+            label="Email"
+            variant="outlined"
+            fullWidth
+            {...register("email", { required: true })}
+          />
+          {errors.email && <span style={{color:"red"}}>Email is required</span>}
+          <br /><br />
 
+          <TextField
+            type="text"
+            label="National ID (CNIC)"
+            variant="outlined"
+            fullWidth
+            {...register("cnic", { required: true })}
+          />
+          {errors.cnic && <span style={{color:"red"}}>CNIC is required</span>}
+          <br /><br />
 
-        <div style={{display:"flex",justifyContent:"center", gap:"30%"}}> 
-         
-       <div><label>Email</label><br />
-      <input type='Email' style={{width: "200%",height:" 3rem",borderRadius:"30px"}} {...register("Email", { required: true, maxLength: 20 })} /> <br /></div>
+          <TextField
+            type="text"
+            label="Gender"
+            variant="outlined"
+            fullWidth
+            {...register("gender", { required: true })}
+          />
+          {errors.gender && <span style={{color:"red"}}>Gender is required</span>}
+          <br /><br />
 
-      <div><label>Phone No</label><br />
-      <input type='number'  style={{width: "200%",height:" 3rem",borderRadius:"30px"}}{...register("Phone no", { required: true, maxLength: 20 })} /> <br /></div>
-      </div>
+          <TextField
+            type="text"
+            label="Address"
+            variant="outlined"
+            fullWidth
+            {...register("address", { required: true })}
+          />
+          {errors.address && <span style={{color:"red"}}>Address is required</span>}
+          <br /><br />
+        </Grid>
 
-      <div style={{display:"flex",justifyContent:"center", gap:"30%"}}>
-        <div>
-      <label>Cnic</label><br />
-      <input  style={{width: "200%",height:" 3rem",borderRadius:"30px"}}{...register("Cnic", { pattern: /^[A-Za-z]+$/i })}  /> <br />
-       </div>
-       <div>
-      <label>Date</label><br />
-      <input type='date' style={{width: "300%",height:" 3rem",borderRadius:"30px"}}{...register("Date", { pattern: /^[A-Za-z]+$/i })}  /> <br />
-         </div> </div>
-        
-        <div style={{display:"flex",justifyContent:"center", gap:"10%"  }}>
+        {/* Second Column */}
+        <Grid item xs={12} sm={6}>
+          <TextField
+            type="text"
+            label="Father Name"
+            variant="outlined"
+            fullWidth
+            {...register("fatherName", { required: true })}
+          />
+          {errors.fatherName && <span style={{color:"red"}}>Father Name is required</span>}
+          <br /><br />
 
-        <div>
-       <label>Gender</label><br />
-      <select  style={{width: "200%",height:" 3rem",borderRadius:"30px"}} {...register("gender")}>
-        <option value="female">female</option>
-        <option value="male">male</option>
-        <option value="other">other</option>
-         </select></div>
-        <div>
-        <label>Do you have a Laptop ?</label><br />
-        <select  style={{width: "200%",height:" 3rem",borderRadius:"30px"}}{...register("gender")}>
-      <option value="yes">yes</option>
-      <option value="no">no</option>
-      </select></div>
+          <TextField
+            type="text"
+            label="Phone Number"
+            variant="outlined"
+            fullWidth
+            {...register("phoneNumber", { required: true })}
+          />
+          {errors.phoneNumber && <span style={{color:"red"}}>Phone Number is required</span>}
+          <br /><br />
 
-      </div>
-      
-   
+          <TextField
+            type="date"
+            label="Date of Birth"
+            InputLabelProps={{ shrink: true }}
+            variant="outlined"
+            fullWidth
+            {...register("dob", { required: true })}
+          />
+          {errors.dob && <span style={{color:"red"}}>Date of Birth is required</span>}
+          <br /><br />
+
+          <TextField
+            type="text"
+            label="Do you have a Laptop?"
+            variant="outlined"
+            fullWidth
+            {...register("laptop", { required: true })}
+          />
+          {errors.laptop && <span style={{color:"red"}}>This field is required</span>}
+          <br /><br />
+
+          <TextField
+            type="text"
+            label="Last Qualification"
+            variant="outlined"
+            fullWidth
+            {...register("qualification", { required: true })}
+          />
+          {errors.qualification && <span style={{color:"red"}}>Qualification is required</span>}
+          <br /><br />
+        </Grid>
+      </Grid>
+
+      {/* Profile Image Section */}
+      <Grid container spacing={3} justifyContent="center">
+        <Grid item xs={12} sm={12}>
+          <Box mt={2}>
+            <Typography variant="h6">Profile Image</Typography>
+            <Button
+              variant="contained"
+              component="label"
+            >
+              Choose File
+              <input
+                type="file"
+                hidden
+                {...register("profileImage", { required: true })}
+              />
+            </Button>
+            {errors.profileImage && <span style={{color:"red"}}>Profile Image is required</span>}
+          </Box>
+          <Box mt={2}>
+            <Typography variant="body2">
+              <ul>
+                <li>With white or blue background</li>
+                <li>File type: jpg, jpeg, png</li>
+                <li>Upload your recent passport size picture</li>
+                <li>Your face should be clearly visible without any glasses</li>
+              </ul>
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* Submit Button */}
+      <Grid container justifyContent="center">
+        <Grid item xs={12} sm={12}>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            style={{ backgroundColor: "blue", color: "white", marginTop: "20px" }}
+          >
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
     </form>
-    </div>
-   
-      
-   
-   </>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
